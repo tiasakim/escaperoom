@@ -1,0 +1,317 @@
+@author Tiasa Kim and Jiamae Wang
+@class AP JAVA P2
+@version Escape Room Project 1.0
+
+import java.util.Scanner;
+public class Escape {
+    public static void main(String[] args) {
+        Scanner console = new Scanner(System.in);
+        System.out.println("You're walking alone in the dark forest and reach across a large old mansion.");
+        System.out.println("To your curiosity, you enter the door to the old mansion.");
+        System.out.println("Suddenly the door shuts behind you and locks. There is no way to open the door from inside. ");
+        System.out.println("You are now stuck inside a haunted house and have 10 minutes to find your way out.");
+        System.out.println();
+        room1();
+        System.out.println();
+        System.out.println("You've now entered the second room.");
+        room2();
+    }
+    public static void room1(){
+        Scanner console = new Scanner(System.in);
+        System.out.print("You stumble upon 4 objects that possibly contain clues for your escape: ");
+        System.out.println("DOOR, TELEPHONE, MIRROR, PIANO ");
+        System.out.print("Use command 'look' and pick an object to observe: ");
+        boolean finish = false;            
+        boolean answer1 = false;
+        boolean answer2 = false;
+        while(!finish){
+            String object = console.nextLine();
+            System.out.println();
+            if(object.equalsIgnoreCase("look door") || object.contains("door")){
+                door(); 
+            } else if(object.equalsIgnoreCase("look telephone") || object.contains("phone")){
+                answer1 = telephone();
+            } else if(object.equalsIgnoreCase("look mirror") || object.contains("mirror") && !answer1){
+                mirror1();
+            } else if(object.equalsIgnoreCase("look mirror") || object.contains("mirror") && answer1){
+                System.out.println("The mirror fogs up and another riddle shows up: ");
+                System.out.println("What has many keys but can’t open a door?");
+                answer2 = true;
+            } else if(object.equalsIgnoreCase("look piano") || object.contains("piano") && !answer2){
+                piano();
+            } else if (object.equalsIgnoreCase("quit")) {
+                System.out.print("YOU LOSE!! HAHAHAHA looks like you're stuck here forever:) ");
+                System.exit(0);
+            } else {
+            }
+            if(object.equalsIgnoreCase("look piano") || object.contains("piano") && answer2){
+                System.out.println("You walk over to the piano, only one key works, Which one?");
+                Puzzle4ENGG();
+                System.out.println("The brick wall rumbles behind you and opens.");
+                System.out.print("ENTER WALL or STAY in room? ");
+                String action = console.nextLine();
+                if(action.equalsIgnoreCase("enter") || action.equalsIgnoreCase("enter wall")) {
+                    finish = true;
+                } else {
+                    finish = false;
+                }
+            }
+            if(object.equalsIgnoreCase("Quit")){
+                System.out.println("YOU LOSE!! HAHAHAHA looks like you're stuck here forever :) ");
+                finish = true;
+            }
+            if(!finish){
+                System.out.println();
+                System.out.print("Pick another object to observe: DOOR, TELEPHONE, MIRROR, PIANO ");
+            } else if(finish){
+            } 
+        }
+    }
+        public static void door(){
+            Scanner console = new Scanner(System.in);
+            System.out.println("What do you want to do with the door: BANG, LOOK, TURN KNOB ");
+            System.out.print("Use command ACTION to do something ");
+            String action = console.nextLine();
+            if(action.equalsIgnoreCase("bang")){
+                System.out.println("The door creaks a little but nobody is out there to help you...");
+            } else if(action.equalsIgnoreCase("look")){
+                System.out.println("The peep hole is blocked from the outside... but you see the number 1) 4");
+            } else if(action.equalsIgnoreCase("turn knob")){
+                System.out.println("The door won't budge...");
+            }
+        }
+        public static boolean telephone(){
+            Scanner console = new Scanner(System.in);
+            System.out.println("What do you want to do to the telephone: PICK UP, LOOK UNDER, CALL ");
+            System.out.print("Use command ACTION to do something ");
+            String action = console.nextLine();
+            if(action.equalsIgnoreCase("pick up")){
+                System.out.println("All you hear is static...");
+                return false;
+            } else if(action.equalsIgnoreCase("look under")){
+                System.out.println("There’s a piece of paper that says the number 2) 7!");
+                return false;
+            } else if(action.equalsIgnoreCase("call")){
+                System.out.println("What 4-digit number do you want to call?");
+                int number = console.nextInt();
+                if(number == 4712){
+                    System.out.println();
+                    System.out.println("The phone starts ringing and you hear a voice that says: ");
+                    System.out.println("What turns everything around without moving?");
+                    System.out.println("The phone hangs up and all you hear is static...");
+                    return true;
+                } else {
+                    System.out.println("The phone doesn't can't connect the call...");
+                    return false;
+                }
+            } else {
+                return false;
+            }
+        }
+        public static void mirror1(){
+            Scanner console = new Scanner(System.in);
+            System.out.println("What do you want to do with the mirror: LOOK BEHIND, SEE REFLECTION ");
+            System.out.print("Use command ACTION to do something ");
+            String action = console.nextLine();
+            if(action.equalsIgnoreCase("see reflection")){
+                System.out.println("There's a little message in the corner: 3) 1");
+            } else if(action.equalsIgnoreCase("look behind")){
+                System.out.println("The paint is peeling behind the mirror but nothing to be searched...");
+            }
+        }
+        public static void piano(){
+            Scanner console = new Scanner(System.in);
+            System.out.println("What do you want to do with the piano: EXAMINE KEYS, PLAY NOTES ");
+            System.out.print("Use command ACTION to do something ");
+            String action = console.nextLine();
+            if(action.equalsIgnoreCase("examine keys")){
+                System.out.println("The keys are worn down but there’s writing on the middle C");
+                System.out.println("As you look closer you see 4) 2");
+            } else if(action.equalsIgnoreCase("play notes")){
+                System.out.println("The notes are all out of tune... You can't play the piano right now");
+            }
+        }
+        public static void Puzzle4ENGG() {      
+            //Gets a random number between 1 and 88
+            Scanner console = new Scanner(System.in);
+            int random = (int) ((Math.random()*88) + 1);
+            System.out.println("Guess a number between 1 and 88. ");
+            String guessUser = console.nextLine();
+            int number=0;
+            int count = 1; 
+            //while loop looks for the correct number or the sentinel 'quit'
+            while(!guessUser.equalsIgnoreCase("Quit") && !guessUser.equals(random+"")) {
+                number = Integer.parseInt(guessUser);
+                count++;
+                //if else statement gives hints
+                if(number > random){
+                    System.out.println("Guess again. Number is lower.");
+                } else{
+                    System.out.println("Try again. Number is higher.");
+                }            
+                System.out.print("Guess a number between 1 and 88. ");
+                guessUser = console.nextLine();
+            }
+            //Quit Statement
+            if (guessUser.equalsIgnoreCase("quit")) {
+                System.out.println("HA HA HA... You are stuck in this haunted house 'till your corpse disintegrates...");
+                //Solution Statement      
+            } else {
+                System.out.println("It took you " + count + " guesses.");
+                if(random % 10 ==1) {
+                    System.out.println("You find the " + random + "st key on the piano and hit it.");
+                } else if (random % 10== 2) {
+                    System.out.println("You find the " + random + "nd key on the piano and hit it.");
+                } else if(random % 10  == 3) {
+                    System.out.println("You find the " + random + "rd key on the piano and hit it.");
+                } else {
+                    System.out.println("You find the " + random + "th key on the piano and hit it.");
+                }
+            }
+        }  
+    public static void room2() {
+        Scanner console = new Scanner(System.in);
+        boolean knife = false;
+        boolean tool = false;
+        boolean finish = false;
+        System.out.println("You find a refrigerator, an old computer, a doll sitting in a rocking chair, ");
+        System.out.println("and a framed picture of Mr. Binz. ");
+        System.out.print("Use command 'look' and pick an object: PICTURE, FRIDGE, COMPUTER, DOLL");
+        while(!finish){
+            String object = console.nextLine();           
+            System.out.println();
+            if(object.equalsIgnoreCase("look fridge") || object.contains("fridge")){
+               tool = fridge(knife, tool);
+            } else if(object.equalsIgnoreCase("look computer") || object.contains("computer")){
+                finish = computer(tool, finish);
+            } else if(object.equalsIgnoreCase("look doll") || object.contains("doll")){
+                knife = doll(); 
+            } else if(object.contains("look picture") || object.contains("picture")) {
+                System.out.println("This is a great picture of the legendary Mr. Binz. Unfortunately, Mr. Binz can't help you.");
+            }
+            if(object.equalsIgnoreCase("Quit")){
+                System.out.println("YOU LOSE!! HAHAHAHA looks like you're stuck here forever :) ");
+                finish = true;
+            }
+            if(!finish){
+                System.out.print("Pick another object to observe: FRIDGE, COMPUTER, DOLL, PICTURE ");
+            } else if(finish){
+            }
+        }
+    }
+    public static boolean doll() {
+        Scanner console = new Scanner(System.in);
+        System.out.println("The doll stares back at you with creepy green eyes and holds a knife in its hand.");
+        System.out.println("TAKE KNIFE or RUN AWAY? ");
+        System.out.print("Use command ACTION to do something ");
+        String action = console.nextLine();
+        System.out.println();
+        if(action.equalsIgnoreCase("take knife")) {
+            System.out.println("Find something to cut with this knife.");
+            return true;
+        } else if(action.equalsIgnoreCase("run away")) {
+            System.out.println("What a scaredy cat! It's just a doll with a knife...");
+            return false;
+        } else {
+            return false;
+        }
+    }
+    public static boolean fridge(boolean knife, boolean tool) {
+        Scanner console = new Scanner(System.in);
+        System.out.println("You must be hungry for some clues... Do you want to OPEN fridge or LIFT fridge? ");
+        System.out.print("Use command ACTION to do something ");
+        String action = console.nextLine();
+        System.out.println();
+        if(action.contains("open")) {
+            tool = actionFridge(knife, tool);
+            return tool;
+        } else if(action.contains("lift")) {
+            System.out.println("Silly you! You're not strong enough to lift the fridge!");
+            return false;
+        } else{
+            return false;
+        }
+    }
+    public static boolean actionFridge (boolean knife, boolean tool) {
+        Scanner console = new Scanner(System.in);
+        System.out.println("The fridge door creaks open. Hm... Looks like someone has been living here.");
+        System.out.println("Inside is an open jar of pickles, half-eaten bologna sandwich, and a chocolate cake. ");
+        tool = food(knife);
+        return tool;
+    }
+    public static boolean food (boolean knife) {
+        Scanner console = new Scanner(System.in);
+        System.out.println("What do you want to take out: PICKLES, SANDWICH, CAKE ");
+        System.out.print("Use command ACTION to do something ");
+        String action = console.nextLine();
+        if(action.equalsIgnoreCase("take out cake") && knife) {
+            System.out.println("You cut the cake in half and find a screwdriver inside!");
+            System.out.println("This seems like a very handy tool to fix something...");
+            return true;
+        } else if(action.equalsIgnoreCase("take out cake") && !knife) {
+            System.out.println("You need a knife to cut the cake. ");
+            return false;
+        } else if(action.equalsIgnoreCase("take out pickles")) {
+            System.out.println("Don't eat these pickles! The monster will get angry! ");
+            return false;
+        } else if(action.equalsIgnoreCase("take out sandwich")) {
+            System.out.println("Yuck! There is mold growing on the bologna. ");
+            return false;
+        } else{
+            return false;
+        }
+    }   
+    public static boolean computer(boolean tool, boolean finish) {
+        Scanner console = new Scanner(System.in);
+        System.out.println("What do you want to do with the computer: TURN ON, LOOK BEHIND ");
+        System.out.print("Use command ACTION to do something ");
+        String action = console.nextLine();
+        if(action.equalsIgnoreCase("turn on") && tool) {
+            finish = math();
+            return finish;
+        } else if(action.equalsIgnoreCase("turn on") && !tool) {
+            System.out.println("Bzz.. The screen shows a static then shuts off. You need a tool to fix the computer.");
+            return false;
+        } else if (action.equalsIgnoreCase("look behind")){
+            System.out.println("There is nothing behind the computer.");
+            return false;
+        } else{
+            return false;
+        }
+    }
+    public static boolean math(){
+        Scanner console = new Scanner(System.in);
+        System.out.println("Congratulations you turned on the computer after fixing it with the screwdriver");
+        System.out.println("Unfortunately it is Mr. Binz's old computer");
+        System.out.println("The screen shows a test titled: Make a mistake and stay here forever");
+        System.out.println("Question 1: Convert this binary number 010110");
+        int input = console.nextInt();
+        if(input == 22){
+            System.out.println("Correct");
+            System.out.println("Question 2: If 5(-2x+1) + (x-2) = -2(4x+1) What is x?");
+            int input2 = console.nextInt();
+            if(input2 == 5){
+                System.out.println("Correct again!");
+                System.out.println("Final Question: If in a complex plane, the horizontal axis is called the real axis");
+                System.out.println("and the vertical axis is called the imaginary axis, the complex number a + bi");
+                System.out.println("graphed in the complex plane is comparable to the point (a,b) graphed in the");
+                System.out.println("standard (x,y) coordinate plane. The modulus of the complex number is sqrt(a^2 + b^2)");
+                System.out.println("and you want to find the exact point in which they meet, what is 1+1");
+                int input3 = console.nextInt();
+                if(input3 == 2){
+                    System.out.println("CONGRATS please exit the door to the left that was unlocked the whole time since you entered");
+                    System.out.println("this room. Who knows why you didn't check it, but go on and be free now"); 
+                } else{
+                    System.out.println("WRONG! Looks like you're stuck here with me forever!!");
+                }
+            } else{
+                System.out.println("WRONG! Looks like you're stuck here with me forever!!");
+            }
+        } else{
+            System.out.println("WRONG! Looks like you're stuck here with me forever!!");
+        }
+        return true;
+    }
+}
+
+
