@@ -1,2 +1,2 @@
-# APJavaProjects
-Projects created using Java in AP Computer Science A course
+# EscapeRoom
+An escape room game programmed in Java for an AP Computer Science A course project
